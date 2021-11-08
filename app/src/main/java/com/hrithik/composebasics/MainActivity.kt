@@ -61,12 +61,24 @@ fun NameList(
     horizontalAlignment: Alignment.Horizontal
 ) {
 
-    LazyColumn(modifier = modifier, horizontalAlignment = horizontalAlignment) {
-        items(items = names) { name ->
+    LazyColumn(
+        modifier = modifier
+        , horizontalAlignment = horizontalAlignment
+    ) {
+        items(
+            items = names
+        ) { name ->
 
             var isSelected by remember { mutableStateOf(false)}
 
-            Greeting(name = name,isSelected = isSelected, updateSelection = { newSelect -> isSelected = newSelect})
+            Greeting(
+                name = name,
+                isSelected = isSelected,
+                updateSelection = { newSelect ->
+                    isSelected = newSelect
+                }
+            )
+
             Divider(color = Color.Black)
         }
     }
@@ -77,7 +89,11 @@ fun MyGreetings(names: List<String> = List(1000) { "Hello Android #$it" }){
 
     val counterState = remember { mutableStateOf(0) }
 
-    Column (modifier = Modifier.fillMaxHeight() ,verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally){
+    Column (
+        modifier = Modifier.fillMaxHeight()
+        ,verticalArrangement = Arrangement.Center
+        , horizontalAlignment = Alignment.CenterHorizontally
+    ){
 //        Column(modifier = Modifier.weight(1f)
 //            , horizontalAlignment = Alignment.CenterHorizontally) {
 //            for (name : String in names){
@@ -86,7 +102,11 @@ fun MyGreetings(names: List<String> = List(1000) { "Hello Android #$it" }){
 //            }
 //        }
 
-        NameList(names = names, modifier = Modifier.weight(1f) , horizontalAlignment = Alignment.CenterHorizontally)
+        NameList(
+            names = names
+            , modifier = Modifier.weight(1f)
+            , horizontalAlignment = Alignment.CenterHorizontally
+        )
 
 //        Divider(color = Color.Transparent, thickness = 32.dp)
         Counter(
@@ -110,11 +130,13 @@ fun Counter() {
 
 @Composable
 fun Counter(count: Int, updateCount: (Int) -> Unit) {
-    OutlinedButton(onClick = { updateCount(count+1) }
-        , modifier = Modifier.padding(32.dp),
+    OutlinedButton(
+        onClick = { updateCount(count+1) },
+        modifier = Modifier.padding(32.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = if (count > 5) Color.Green else Color.White
-        )) {
+        )
+    ) {
 
         Text("I've been clicked $count times")
 
@@ -130,9 +152,10 @@ fun Greeting(name: String, isSelected: Boolean, updateSelection : (Boolean) -> U
 
     Text(text = "Hello $name!"
         , modifier = Modifier.padding(12.dp)
-            .background(color = backgroundColor)
-            .clickable (onClick = {updateSelection(!isSelected)})
-        , color = Color.Magenta,style = MaterialTheme.typography.h4)
+                    .background(color = backgroundColor)
+                    .clickable (onClick = {updateSelection(!isSelected)})
+        ,color = Color.Magenta
+        ,style = MaterialTheme.typography.h4)
 }
 
 
